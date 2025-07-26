@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Simulatore Pluriball</title>
+  <style>
+    body {
+      margin: 0;
+      background: #f0f0f0;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      user-select: none;
+      padding-bottom: 60px; /* spazio per footer */
+    }
+    .bubble {
+      width: 60px;
+      height: 60px;
+      margin: 5px;
+      border-radius: 50%;
+      background: #4caf50;
+      border: 2px solid transparent;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+    .bubble.popped {
+      background: transparent;
+      border-color: #4caf50;
+      box-shadow: none;
+    }
+    #container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      width: 100%;
+    }
+    footer {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 50px;
+      background: #222;
+      color: #eee;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: sans-serif;
+      box-shadow: 0 -2px 5px rgba(0,0,0,0.3);
+      user-select: none;
+      padding: 0 20px;
+      box-sizing: border-box;
+    }
+    #reset-btn {
+      background: #4caf50;
+      border: none;
+      border-radius: 5px;
+      color: white;
+      font-size: 16px;
+      padding: 8px 16px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      margin: 0 auto;
+      order: 2;
+    }
+    #reset-btn:hover {
+      background: #45a045;
+    }
+    #counter {
+      margin-left: auto;
+      font-weight: bold;
+      order: 3;
+      font-size: 16px;
+      user-select: text;
+    }
+    footer > div.spacer {
+      flex: 1;
+      order: 1;
+    }
+  </style>
+</head>
+<body>
+  <div id="container"></div>
+
+  <footer>
+    <div class="spacer"></div>
+    <button id="reset-btn">RESET</button>
+    <div id="counter">Scoppiate: 0</div>
+  </footer>
+
+  <script>
+    const container = document.getElementById('container');
+    const resetBtn = document.getElementById('reset-btn');
+    const counter = document.getElementById('counter');
+
+    // Audio Context per il click sonoro
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+    let poppedCount = 0;
+
+    function playClickSound() {
+      const oscillator = audioCtx.createOscillator();
+      const gainNode = audioCtx.createGain();
+
+      oscillator.type = 'square';
+      oscillator.frequency.setValueAtTime(1000, audioCtx.currentTime);
+      gainNode.gain.setValueAtTime(0.1, audioCtx.currentTime);
+
+      oscillator.connect(gainNode);
+      gainNode.connect(audioCtx.destination);
+
+      oscillator.start();
+      oscillator.stop(audioCtx.currentTime + 0.05);
+    }
+
+    function tryVibrate(pattern) {
+      let didVibrate = false;
+      try {
+        if ('vibrate' in navigator) {
+          didVibrate = navigator.vibrate(pattern);
+        } else if ('webkitVibrate' in navigator) {
+          didVibrate = navigator.webkitVibrate(pattern);
+        }
+      } catch(e) {
+        console.warn('Errore vibrazione:', e);
+      }
+      return didVibrate;
+    }
+
+    function updateCounter() {
+      counter.textContent = `Scoppiate: ${poppedCount}`;
+    }
+
+    function createBubble() {
+      const bubble = document.createElement('div');
+      bubble.classList.add('bubble');
+
+      bubble.addEventListener('click', () => {
+        if (bubble.classList.contains('popped')) return;
+
+        bubble.classList.add('popped');
+        poppedCount++;
+        updateCounter();
+
+        if (audioCtx.state === 'suspended') {
+          audioCtx.resume().then(() => playClickSound());
+        } else {
+          playClickSound();
+        }
+
+        const vibrated = tryVibrate([50, 30, 50]) || tryVibrate(100) || tryVibrate(50);
+        if (!vibrated) {
+          console.warn('Vibrazione non supportata o bloccata dal browser.');
+        }
+      });
+
+      container.appendChild(bubble);
+    }
+
+    function resetBubbles() {
+      const poppedBubbles = container.querySelectorAll('.bubble.popped');
+      poppedBubbles.forEach(bubble => bubble.classList.remove('popped'));
+      poppedCount = 0;
+      updateCounter();
+    }
+
+    // Inizializzo 100 bolle
+    for (let i = 0; i < 100; i++) {
+      createBubble();
+    }
+
+    // Infinite scroll
+    window.addEventListener('scroll', () => {
+      if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 100) {
+        for (let i = 0; i < 50; i++) {
+          createBubble();
+        }
+      }
+    });
+
+    resetBtn.addEventListener('click', resetBubbles);
+
+    updateCounter();
+  </script>
+</body>
+</html>
