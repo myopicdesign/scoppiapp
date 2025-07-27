@@ -3,7 +3,7 @@ body {
   background-color: #81afc6;
   font-family: 'Roboto Mono', monospace;
   overflow-x: hidden;
-  padding-bottom: 100px; /* per spazio sotto bolle */
+  padding-top: 100px; /* spazio per la barra in alto */
 }
 
 #bubble-container {
@@ -33,33 +33,39 @@ body {
   flex-shrink: 0;
 }
 
-/* Barra footer fissa, centrata e ben disposta */
+/* BARRA IN ALTO FISSA E CENTRATA */
 #footer {
   position: fixed;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 320px; /* larghezza adatta a schermi piccoli */
+  top: 0;
+  left: 0;
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
   height: 80px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.4), transparent);
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.4), transparent);
   padding: 10px 20px;
   box-sizing: border-box;
   z-index: 1000;
-  border-radius: 12px 12px 0 0;
   backdrop-filter: blur(8px);
 }
 
-/* Contatore bianco, ben visibile */
+/* CENTRARE LA BARRA SULLO SCHERMO MOBILE */
+@media (max-width: 480px) {
+  #footer {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
 #counter {
   color: white;
   font-size: 16px;
   user-select: none;
 }
 
-/* Pulsante reset tondo, centrato */
 #reset-button {
   width: 60px;
   height: 60px;
@@ -78,18 +84,4 @@ body {
 
 #reset-button:active {
   background-color: rgba(255, 255, 255, 0.4);
-}
-
-/* Evita che il footer copra i contenuti scorrendo */
-@media (max-width: 480px) {
-  #footer {
-    width: 280px;
-    padding: 10px 16px;
-  }
-
-  .bubble {
-    width: 70px;
-    height: 70px;
-    margin: 4px;
-  }
 }
