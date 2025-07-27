@@ -1,17 +1,20 @@
+/* Blocca scroll orizzontale, solo verticale */
 body {
   margin: 0;
   background-color: #81afc6;
   font-family: 'Roboto Mono', monospace;
-  overflow-x: hidden;
+  overflow-x: hidden; /* blocca scroll orizzontale */
+  -webkit-overflow-scrolling: touch; /* scroll fluido su iOS */
 }
 
 #bubble-container {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding-bottom: 100px; /* spazio sotto per il footer fisso */
+  padding-bottom: 120px; /* spazio per footer fisso */
 }
 
+/* Disposizione bolle come originale */
 .bubble-row {
   display: flex;
   margin-bottom: 10px;
@@ -32,12 +35,13 @@ body {
   flex-shrink: 0;
 }
 
+/* Barra footer fissa in basso, centrata assolutamente */
 #footer {
   position: fixed;
-  bottom: 0;
+  bottom: 20px;  /* leggero margine dal fondo */
   left: 50%;
   transform: translateX(-50%);
-  width: 320px; /* larghezza fissa per centrare bene la barra su telefoni */
+  width: 320px; /* fissa larghezza per barra */
   height: 80px;
   display: flex;
   justify-content: space-between;
@@ -46,7 +50,7 @@ body {
   padding: 10px 20px;
   box-sizing: border-box;
   z-index: 1000;
-  border-radius: 10px 10px 0 0; /* un tocco estetico */
+  border-radius: 12px;
 }
 
 #counter {
