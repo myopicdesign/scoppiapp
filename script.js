@@ -28,15 +28,15 @@ function generateBubbleRow(bubblesPerRow = 6) {
   for (let i = 0; i < bubblesPerRow + 2; i++) {
     const bubble = document.createElement("div");
     bubble.classList.add("bubble");
-    bubble.style.backgroundImage = url(${fullBubbleImage});
+    bubble.style.backgroundImage = `url(${fullBubbleImage})`;
 
     bubble.addEventListener("click", () => {
       if (!bubble.classList.contains("popped")) {
         bubble.classList.add("popped");
         const poppedImg = poppedImages[Math.floor(Math.random() * poppedImages.length)];
-        bubble.style.backgroundImage = url(${poppedImg});
+        bubble.style.backgroundImage = `url(${poppedImg})`;
         poppedCount++;
-        counterDisplay.textContent = Scoppiate: ${poppedCount};
+        counterDisplay.textContent = `Scoppiate: ${poppedCount}`;
         const sound = popSounds[Math.floor(Math.random() * popSounds.length)];
         sound.currentTime = 0;
         sound.play();
