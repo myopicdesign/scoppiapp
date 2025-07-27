@@ -63,7 +63,6 @@ body {
     cursor: pointer;
     user-select: none;
     margin: 20px;
-    filter: invert(1);
     color: white;
 }
 
