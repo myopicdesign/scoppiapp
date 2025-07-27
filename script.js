@@ -19,6 +19,7 @@ const poppedImages = [
 const fullBubbleImage = "https://myopicdesign.github.io/scoppiapp/src/Ballpiena.png";
 
 let poppedCount = 0;
+let totalRows = 0;
 
 function createBubble() {
   const bubble = document.createElement("div");
@@ -29,32 +30,41 @@ function createBubble() {
     if (!bubble.classList.contains("popped")) {
       bubble.classList.add("popped");
 
-      // Cambia immagine con una random tra le vuote
       const poppedImg = poppedImages[Math.floor(Math.random() * poppedImages.length)];
       bubble.style.backgroundImage = `url(${poppedImg})`;
 
-      // Incrementa contatore
       poppedCount++;
       counterDisplay.textContent = `Scoppiati: ${poppedCount}`;
 
-      // Suono random
       const sound = popSounds[Math.floor(Math.random() * popSounds.length)];
       sound.currentTime = 0;
       sound.play();
 
-      // Vibrazione "massima" (entro i limiti consentiti)
       if (navigator.vibrate) {
-        navigator.vibrate([100]);
+        navigator.vibrate([100]); // vibrazione più decisa
       }
     }
   });
 
-  bubbleContainer.appendChild(bubble);
+  return bubble;
 }
 
-function generateInitialBubbles(count = 60) {
-  for (let i = 0; i < count; i++) {
-    createBubble();
+function generateBubbleRow(bubblesPerRow = 5) {
+  const row = document.createElement("div");
+  row.classList.add("bubble-row");
+  if (totalRows % 2 !== 0) row.classList.add("odd");
+
+  for (let i = 0; i < bubblesPerRow; i++) {
+    row.appendChild(createBubble());
+  }
+
+  bubbleContainer.appendChild(row);
+  totalRows++;
+}
+
+function generateInitialBubbles(rowCount = 10) {
+  for (let i = 0; i < rowCount; i++) {
+    generateBubbleRow();
   }
 }
 
@@ -62,18 +72,16 @@ function resetBubbles() {
   bubbleContainer.innerHTML = "";
   poppedCount = 0;
   counterDisplay.textContent = "Scoppiati: 0";
+  totalRows = 0;
   generateInitialBubbles();
 }
 
-// Infinite scroll
 window.addEventListener("scroll", () => {
   if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 100) {
-    generateInitialBubbles(40);
+    generateInitialBubbles(6);
   }
 });
 
-// Reset
 resetButton.addEventListener("click", resetBubbles);
 
-// Init
 generateInitialBubbles();
