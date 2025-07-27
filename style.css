@@ -57,20 +57,14 @@ body {
   font-size: 16px;
 }
 
-#reset-button {
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  border: none;
-  background-color: rgba(255, 255, 255, 0.2);
-  color: white;
-  font-size: 24px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  backdrop-filter: blur(8px);
+#reset-icon {
+  width: 40px;    /* Mantieni una dimensione simile a prima */
+  height: 40px;
   cursor: pointer;
+  user-select: none;
+  filter: invert(1); /* Se serve, per rendere l'icona bianca su sfondo scuro */
 }
+
 
 .footer-icon {
   color: white;
