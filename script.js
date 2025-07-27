@@ -25,7 +25,7 @@ function generateBubbleRow(bubblesPerRow = 6) {
   row.classList.add("bubble-row");
   if (totalRows % 2 !== 0) row.classList.add("odd");
 
-  for (let i = 0; i < bubblesPerRow; i++) {
+  for (let i = 0; i < bubblesPerRow + 2; i++) {
     const bubble = document.createElement("div");
     bubble.classList.add("bubble");
     bubble.style.backgroundImage = `url(${fullBubbleImage})`;
@@ -55,7 +55,7 @@ function generateBubbleRow(bubblesPerRow = 6) {
 
 function generateInitialBubbles(rowCount = 12) {
   for (let i = 0; i < rowCount; i++) {
-    generateBubbleRow(6);
+    generateBubbleRow();
   }
 }
 
