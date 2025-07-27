@@ -6,15 +6,23 @@ body {
 }
 
 #bubble-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
   padding: 8px;
 }
 
+/* Griglia sfalsata */
+.bubble-row {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2px;
+}
+
+.bubble-row.odd {
+  margin-left: 42px; /* metà della bolla (84 / 2) */
+}
+
 .bubble {
-  width: 80px;
-  height: 80px;
+  width: 84px;
+  height: 84px;
   margin: 2px;
   background-size: contain;
   background-position: center;
