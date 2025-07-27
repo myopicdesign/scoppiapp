@@ -58,13 +58,14 @@ body {
 }
 
 #reset-icon {
-  width: 40px;    /* Mantieni una dimensione simile a prima */
-  height: 40px;
-  cursor: pointer;
-  user-select: none;
-  filter: invert(1); /* Se serve, per rendere l'icona bianca su sfondo scuro */
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    user-select: none;
+    margin: 20px;
+    filter: invert(1);
+    color: white;
 }
-
 
 .footer-icon {
   color: white;
