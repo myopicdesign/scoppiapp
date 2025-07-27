@@ -3,7 +3,6 @@ body {
   background-color: #81afc6;
   font-family: 'Roboto Mono', monospace;
   overflow-x: hidden;
-  padding-bottom: 100px; /* lascia spazio sotto alle bolle per la barra fissa */
 }
 
 #bubble-container {
@@ -33,14 +32,11 @@ body {
   flex-shrink: 0;
 }
 
-/* ✅ FISSA IN BASSO, CENTRATA, RESPONSIVE */
 #footer {
   position: fixed;
   bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
+  left: 0;
   width: 100%;
-  max-width: 480px;
   height: 80px;
   display: flex;
   justify-content: space-between;
@@ -49,7 +45,6 @@ body {
   padding: 10px 20px;
   box-sizing: border-box;
   z-index: 1000;
-  backdrop-filter: blur(8px);
 }
 
 #counter {
