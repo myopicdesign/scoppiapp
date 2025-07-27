@@ -3,7 +3,7 @@ body {
   background-color: #81afc6;
   font-family: 'Roboto Mono', monospace;
   overflow-x: hidden;
-  padding-top: 100px; /* spazio per la barra in alto */
+  padding-bottom: 100px; /* lascia spazio sotto alle bolle per la barra fissa */
 }
 
 #bubble-container {
@@ -33,20 +33,23 @@ body {
   flex-shrink: 0;
 }
 
-/* CORRETTO: barra FISSA IN ALTO e CENTRATA */
+/* ✅ FISSA IN BASSO, CENTRATA, RESPONSIVE */
 #footer {
   position: fixed;
-  top: 0;
-  left: 0;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
   width: 100%;
+  max-width: 480px;
   height: 80px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.4), transparent);
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.4), transparent);
   padding: 10px 20px;
   box-sizing: border-box;
   z-index: 1000;
+  backdrop-filter: blur(8px);
 }
 
 #counter {
