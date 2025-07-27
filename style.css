@@ -42,7 +42,7 @@ body {
   left: 0;
   right: 0;
   width: 100vw; /* Assicura tutta la larghezza della viewport */
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.4), transparent);
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.6), transparent);
   display: flex;
   justify-content: space-between;
   align-items: center;
