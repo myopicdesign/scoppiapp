@@ -2,77 +2,68 @@ body {
   margin: 0;
   background-color: #81afc6;
   font-family: 'Roboto Mono', monospace;
-  overflow-x: hidden;
+  overflow-y: scroll;
 }
 
 #bubble-container {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  padding-bottom: 100px;
+  padding: 8px;
+  padding-bottom: 100px; /* lascia spazio per il footer */
 }
 
+/* Griglia sfalsata */
 .bubble-row {
   display: flex;
-  margin-bottom: 10px;
-  margin-left: -40px;
+  justify-content: center;
+  margin-bottom: 2px;
 }
 
 .bubble-row.odd {
-  margin-left: 0;
+  margin-left: 42px; /* metà della bolla (84 / 2) */
 }
 
 .bubble {
-  width: 80px;
-  height: 80px;
-  margin: 5px;
+  width: 84px;
+  height: 84px;
+  margin: 2px;
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
-  flex-shrink: 0;
+  border-radius: 50%;
+  transition: transform 0.1s;
 }
 
+.bubble:active {
+  transform: scale(0.96);
+}
+
+/* Footer fisso in basso */
 #footer {
   position: fixed;
   bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 320px;
+  left: 0;
+  right: 0;
   height: 80px;
+  background: rgba(255 255 255 / 0.9);
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.4), transparent);
+  gap: 20px;
+  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.2);
   padding: 10px 20px;
-  box-sizing: border-box;
   z-index: 1000;
-  /* evitiamo sparizione */
-}
-
-#counter {
-  color: white;
-  font-size: 16px;
-  flex-shrink: 0;
 }
 
 #reset-button {
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
+  background: #ffffff;
   border: none;
-  background-color: rgba(255, 255, 255, 0.2);
-  color: white;
-  font-size: 24px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  backdrop-filter: blur(8px);
+  padding: 12px 24px;
+  font-size: 20px;
+  border-radius: 12px;
   cursor: pointer;
-  flex-shrink: 0;
 }
 
-.footer-icon {
-  color: white;
-  font-size: 24px;
-  flex-shrink: 0;
+#counter {
+  font-weight: bold;
+  font-size: 18px;
+  color: #333;
 }
