@@ -34,14 +34,14 @@ function createBubble() {
       bubble.style.backgroundImage = `url(${poppedImg})`;
 
       poppedCount++;
-      counterDisplay.textContent = `Scoppiati: ${poppedCount}`;
+      counterDisplay.textContent = `Scoppiate: ${poppedCount}`;
 
       const sound = popSounds[Math.floor(Math.random() * popSounds.length)];
       sound.currentTime = 0;
       sound.play();
 
       if (navigator.vibrate) {
-        navigator.vibrate([100]); // vibrazione più decisa
+        navigator.vibrate([150]);
       }
     }
   });
@@ -49,12 +49,11 @@ function createBubble() {
   return bubble;
 }
 
-function generateBubbleRow(bubblesPerRow = 5) {
+function generateBubbleRow(columns = 6) {
   const row = document.createElement("div");
   row.classList.add("bubble-row");
-  if (totalRows % 2 !== 0) row.classList.add("odd");
 
-  for (let i = 0; i < bubblesPerRow; i++) {
+  for (let i = 0; i < columns; i++) {
     row.appendChild(createBubble());
   }
 
@@ -62,7 +61,7 @@ function generateBubbleRow(bubblesPerRow = 5) {
   totalRows++;
 }
 
-function generateInitialBubbles(rowCount = 10) {
+function generateInitialBubbles(rowCount = 15) {
   for (let i = 0; i < rowCount; i++) {
     generateBubbleRow();
   }
@@ -71,14 +70,14 @@ function generateInitialBubbles(rowCount = 10) {
 function resetBubbles() {
   bubbleContainer.innerHTML = "";
   poppedCount = 0;
-  counterDisplay.textContent = "Scoppiati: 0";
+  counterDisplay.textContent = "Scoppiate: 0";
   totalRows = 0;
   generateInitialBubbles();
 }
 
 window.addEventListener("scroll", () => {
   if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 100) {
-    generateInitialBubbles(6);
+    generateInitialBubbles(8);
   }
 });
 
