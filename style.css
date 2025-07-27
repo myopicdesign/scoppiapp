@@ -33,14 +33,12 @@ body {
   flex-shrink: 0;
 }
 
-/* BARRA IN ALTO FISSA E CENTRATA */
+/* CORRETTO: barra FISSA IN ALTO e CENTRATA */
 #footer {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  max-width: 480px;
-  margin: 0 auto;
   height: 80px;
   display: flex;
   justify-content: space-between;
@@ -49,21 +47,11 @@ body {
   padding: 10px 20px;
   box-sizing: border-box;
   z-index: 1000;
-  backdrop-filter: blur(8px);
-}
-
-/* CENTRARE LA BARRA SULLO SCHERMO MOBILE */
-@media (max-width: 480px) {
-  #footer {
-    left: 50%;
-    transform: translateX(-50%);
-  }
 }
 
 #counter {
   color: white;
   font-size: 16px;
-  user-select: none;
 }
 
 #reset-button {
@@ -77,11 +65,11 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
   backdrop-filter: blur(8px);
-  user-select: none;
+  cursor: pointer;
 }
 
-#reset-button:active {
-  background-color: rgba(255, 255, 255, 0.4);
+.footer-icon {
+  color: white;
+  font-size: 24px;
 }
