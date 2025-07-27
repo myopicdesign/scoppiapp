@@ -38,19 +38,18 @@ body {
 /* Barra footer fissa in basso, centrata assolutamente */
 #footer {
   position: fixed;
-  bottom: 20px;  /* leggero margine dal fondo */
-  left: 50%;
-  transform: translateX(-50%);
-  width: 320px; /* fissa larghezza per barra */
-  height: 80px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100vw; /* Assicura tutta la larghezza della viewport */
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.4), transparent);
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.4), transparent);
   padding: 10px 20px;
   box-sizing: border-box;
   z-index: 1000;
-  border-radius: 12px;
+  box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.4); /* Ombra più ampia */
 }
 
 #counter {
