@@ -1,5 +1,5 @@
 const bubbleContainer = document.getElementById("bubble-container");
-const resetButton = document.getElementById("reset-button");
+const resetButton = document.getElementById("reset-icon"); // aggiornato
 const counterDisplay = document.getElementById("counter");
 
 const fullBubbleImage = "https://myopicdesign.github.io/scoppiapp/src/Ballpiena.png";
@@ -67,7 +67,7 @@ function resetBubbles() {
   generateInitialBubbles();
 }
 
-resetButton.addEventListener("click", resetBubbles);
+resetButton.addEventListener("click", resetBubbles); // aggiornato
 
 window.addEventListener("scroll", () => {
   if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 100) {
