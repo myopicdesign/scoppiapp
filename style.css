@@ -2,64 +2,86 @@ body {
   margin: 0;
   background-color: #81afc6;
   overflow-y: scroll;
-  font-family: sans-serif;
+  font-family: 'Roboto Mono', monospace;
 }
 
 #bubble-container {
-  padding: 8px;
-}
-
-/* Griglia sfalsata */
-.bubble-row {
   display: flex;
-  justify-content: center;
-  margin-bottom: 2px;
+  flex-wrap: wrap;
+  padding: 0;
+  margin: 0;
+  position: relative;
 }
 
-.bubble-row.odd {
-  margin-left: 42px; /* metà della bolla (84 / 2) */
-}
-
+/* Griglia esagonale sfalsata */
 .bubble {
-  width: 84px;
-  height: 84px;
-  margin: 2px;
+  width: 86px;
+  height: 86px;
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
-  border-radius: 50%;
+  margin: -12px -6px;
+  flex: 0 0 auto;
   transition: transform 0.1s;
 }
 
-.bubble:active {
-  transform: scale(0.96);
+.bubble-row {
+  display: flex;
+  flex-direction: row;
 }
 
+.bubble-row:nth-child(odd) {
+  margin-left: 43px;
+}
+
+.bubble:active {
+  transform: scale(0.95);
+}
+
+/* Footer */
 #footer {
   position: fixed;
   bottom: 0;
   left: 0;
   right: 0;
-  background: #ffffffcc;
+  height: 80px;
+  background: linear-gradient(to top, rgba(0,0,0,0.4), rgba(0,0,0,0));
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 12px 20px;
-  font-size: 18px;
-  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.2);
+  padding: 0 20px;
+  z-index: 999;
+  pointer-events: none; /* così la UI resta visibile sopra ma non blocca gli scroll */
+}
+
+#footer * {
+  pointer-events: auto;
+}
+
+.footer-icon {
+  font-size: 26px;
+  color: white;
+  opacity: 0.7;
 }
 
 #reset-button {
-  background: #ffffff;
+  background: rgba(255, 255, 255, 0.15);
   border: none;
-  padding: 10px 18px;
-  font-size: 16px;
-  border-radius: 10px;
+  color: white;
+  font-size: 26px;
+  border-radius: 50%;
+  width: 58px;
+  height: 58px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(6px);
+  box-shadow: 0 0 8px rgba(0,0,0,0.3);
   cursor: pointer;
-  margin: auto;
 }
 
 #counter {
-  margin-left: auto;
-  font-weight: bold;
+  color: white;
+  font-weight: normal;
+  font-size: 16px;
 }
